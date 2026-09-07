@@ -4,6 +4,7 @@ import com.perfdog.utils.ApiConfig;
 import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -51,10 +52,14 @@ public class LogoutTest {
 
     @Test
     public void logout_shouldReturnSuccess() {
-        given()
+        Response response = given()
                 .when()
-                .get("/user/logout")
-                .then()
+                .get("/user/logout");
+
+        System.out.println("Status code recibido del test LogoutTest: " + response.getStatusCode());
+        System.out.println("Body recibido del test LogoutTest: " + response.getBody().asString());
+
+        response.then()
                 .statusCode(200)
                 .body("message", equalTo("ok"));
     }

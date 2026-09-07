@@ -4,6 +4,7 @@ import com.perfdog.utils.ApiConfig;
 import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,9 +22,7 @@ public class CreateUserTest {
 
     @Test
     public void createUser_shouldReturnSuccess() {
-        // Cuerpo del request: un usuario nuevo con username único
         String uniqueUsername = "perfdoguser" + System.currentTimeMillis();
-
         String requestBody = "{"
                 + "\"id\": 1,"
                 + "\"username\": \"" + uniqueUsername + "\","
@@ -35,13 +34,17 @@ public class CreateUserTest {
                 + "\"userStatus\": 1"
                 + "}";
 
-        given()
+        Response response = given()
                 .contentType(ContentType.JSON)
                 .body(requestBody)
                 .when()
-                .post("/user")
-                .then()
+                .post("/user");
+
+        System.out.println("Status code recibido del test CreateUser: " + response.getStatusCode());
+        System.out.println("Body recibido del test CreateUser: " + response.getBody().asString());
+
+        response.then()
                 .statusCode(200)
-                .body("message", equalTo("1")); // el petstore de ejemplo devuelve el id como "message"
+                .body("message", equalTo("1"));
     }
 }

@@ -44,6 +44,7 @@ public class GetPetByIdTest {
                 .then()
                 .statusCode(200)
                 .extract().response();
+        System.out.println("Status code recibido del test IdTest: " + response.getStatusCode());
 
         long returnedId = response.jsonPath().getLong("id");
         Assert.assertEquals(returnedId, petId, "El id de la mascota consultada no coincide");

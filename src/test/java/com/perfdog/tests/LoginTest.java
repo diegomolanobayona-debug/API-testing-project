@@ -4,6 +4,7 @@ import com.perfdog.utils.ApiConfig;
 import io.restassured.http.ContentType;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
@@ -44,12 +45,16 @@ public class LoginTest {
 
     @Test
     public void login_withValidUser_shouldReturnSuccess() {
-        given()
+        Response response = given()
                 .queryParam("username", username)
                 .queryParam("password", password)
                 .when()
-                .get("/user/login")
-                .then()
+                .get("/user/login");
+
+        System.out.println("Status code recibido del test LoginTest: " + response.getStatusCode());
+        System.out.println("Body recibido del test LoginTest: " + response.getBody().asString());
+
+        response.then()
                 .statusCode(200)
                 .body("message", containsString("logged in user session"));
     }

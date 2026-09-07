@@ -55,6 +55,7 @@ public class CreateOrderTest {
                 .body("status", equalTo("placed"))
                 .body("id", notNullValue())
                 .extract().response();
+        System.out.println("Status code recibido del test CreateOrder: " + response.getStatusCode());
 
         long returnedPetId = response.jsonPath().getLong("petId");
         Assert.assertEquals(returnedPetId, petId, "El petId de la orden no coincide");
