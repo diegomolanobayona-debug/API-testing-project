@@ -55,6 +55,8 @@ pom.xml      → dependencias (RestAssured, TestNG, Hamcrest) vía Maven
 - **CreateOrderTest**: toma un `petId` real y crea una orden, validando que quede
   en estado `"placed"` y asociada al pet correcto.
 - **LogoutTest**: crea usuario, hace login y valida que el logout responda 200.
+- **GetPetByIdNotFoundTest**: valida el camino negativo — al consultar un `petId`
+  inexistente, la API debe responder `404` con mensaje de error, no un `200` falso.
 
 Cada test es **independiente**: obtiene sus propios datos (usuario, petId) dentro
 de su `@BeforeClass`, sin depender de lo que haya hecho otro test.
