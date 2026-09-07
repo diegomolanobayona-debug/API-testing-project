@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="PerfDog API Test Suite" verbose="1">
+
+    <test name="PerfDog Petstore API Tests">
+        <classes>
+            <class name="com.perfdog.tests.CreateUserTest"/>
+            <class name="com.perfdog.tests.LoginTest"/>
+            <class name="com.perfdog.tests.ListAvailablePetsTest"/>
+            <class name="com.perfdog.tests.GetPetByIdTest"/>
+            <class name="com.perfdog.tests.CreateOrderTest"/>
+            <class name="com.perfdog.tests.LogoutTest"/>
+        </classes>
+    </test>
+
+</suite>
